@@ -11,3 +11,11 @@ Logger.WriteLog("Application started.");
 
 ProductService Service = new ProductService(Writer);
 Service.Add("Demo", "Azucar refinada");
+
+/*
+ * AppLoger y los Writers : Responsabilidad unica 
+ * AppLogger: Abierto pero cerrrado 
+ * appLogger: Inversion de dependecias. los Modulos de alto nicel son independientes de los detalles de implementacion. 
+ * 
+ * 
+ * */
