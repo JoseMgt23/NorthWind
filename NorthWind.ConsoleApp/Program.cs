@@ -1,10 +1,15 @@
 ﻿
 
+using Microsoft.Extensions.Hosting;
 using NorthWind.ConsoleApp.Services;
 using NorthWind.Entities.interfaces;
 using NorthWind.Writers;
+using Microsoft.Extensions.DependencyInjection;
 
-IUserActionWriter Writer = new DebugWriter();
+var Builder = Host.CreateApplicationBuilder();
+Builder.Services.AddSingleton<IUserActionWriter, DebugWriter>();
+Builder.Services.AddSingleton<AppLogger>();
+IUserActionWriter Writer = new ConsoleWriter();
 
 AppLogger Logger = new AppLogger(Writer);
 Logger.WriteLog("Application started.");
