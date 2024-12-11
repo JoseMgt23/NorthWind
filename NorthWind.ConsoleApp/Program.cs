@@ -6,15 +6,16 @@ using NorthWind.Entities.interfaces;
 using NorthWind.Writers;
 using Microsoft.Extensions.DependencyInjection;
 
-var Builder = Host.CreateApplicationBuilder();
+HostApplicationBuilder Builder = Host.CreateApplicationBuilder();
 Builder.Services.AddSingleton<IUserActionWriter, DebugWriter>();
 Builder.Services.AddSingleton<AppLogger>();
-IUserActionWriter Writer = new ConsoleWriter();
+Builder.Services.AddSingleton<ProductService>();
+using IHost AppHost = Builder.Build();
 
-AppLogger Logger = new AppLogger(Writer);
+AppLogger Logger = AppHost.Services.GetRequiredService<AppLogger>();
 Logger.WriteLog("Application started.");
 
-ProductService Service = new ProductService(Writer);
+ProductService Service = AppHost.Services.GetRequiredService<ProductService>();
 Service.Add("Demo", "Azucar refinada");
 
 /*
