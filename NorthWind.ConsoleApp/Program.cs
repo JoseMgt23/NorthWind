@@ -7,8 +7,8 @@ using NorthWind.Writers;
 using Microsoft.Extensions.DependencyInjection;
 
 HostApplicationBuilder Builder = Host.CreateApplicationBuilder();
-Builder.Services.AddSingleton<IUserActionWriter, DebugWriter>();
 Builder.Services.AddSingleton<IUserActionWriter, ConsoleWriter>();
+Builder.Services.AddSingleton<IUserActionWriter, DebugWriter>();
 Builder.Services.AddSingleton<AppLogger>();
 Builder.Services.AddSingleton<ProductService>();
 using IHost AppHost = Builder.Build();
